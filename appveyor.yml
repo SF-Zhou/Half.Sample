@@ -1,6 +1,6 @@
 environment:
-  - PYTHON: "C:\\Python36"
-    SCONS_VERSION: "3.0.1"
+  PYTHON: "C:\\Python36"
+  SCONS_VERSION: "3.0.1"
 
 
 install:
