@@ -7,7 +7,7 @@ namespace Sampler {
 
 class MockSampler: public Sampler {
     public:
-    virtual bool sample(const SamplerConfig &config, Result::AbstractResult &result);
+    virtual bool sample(const SamplerConfig &config, Result::SamplingResult &result);
 };
 
 } // namespace Sampler

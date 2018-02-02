@@ -1,19 +1,14 @@
-#include <iostream>
+#include "constant.hpp"
 #include "result/sampling_result.hpp"
 #include "sampler/sampler_factory.hpp"
-using namespace std;
 
-const int MaxBufferSize = 1000;
-Result::SamplingResult<MaxBufferSize> result;
-
+namespace Global {
+    Result::SamplingResult result;
+    Sampler::SamplerConfig config;
+    Sampler::SamplerPtr sampler = Sampler::SamplerFactory::get("mock_sampler");
+}
 
 int main() {
-    Sampler::SamplerConfig config;
-    config.sampling_frequency = int(2e7);
-    config.sampling_length = 1000;
-    config.number_of_waveforms = 2;
-
-    Sampler::SamplerPtr sampler = Sampler::SamplerFactory::get("mock_sampler");
-    bool ret = sampler->sample(config, result);
-    std::cout << ret << std::endl;
+    Global::config.update(2, 200);
+    Global::sampler->sample(Global::config, Global::result);
 }

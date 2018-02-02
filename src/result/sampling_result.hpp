@@ -1,19 +1,13 @@
 #ifndef SAMPLING_RESULT_HPP
 #define SAMPLING_RESULT_HPP
 
-#include "abstract_result.hpp"
+#include "../constant.hpp"
 
 namespace Result {
 
-template<int BufferSize>
-class SamplingResult: public AbstractResult {
-    public:
-    virtual double *get_buffer() {
-        return buffer;
-    }
-
-    private:
-    double buffer[BufferSize];
+struct SamplingResult {
+    double buffer[Constant::MaxBufferSize];
+    double wave[Constant::MaxBufferSize / 16];
 };
 
 } // namespace Result;
