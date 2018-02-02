@@ -2,6 +2,7 @@ environment:
   PYTHON: "C:\\Python36"
 
 install:
+  - SET "PYTHONHOME=%PYTHON%"
   - SET "PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - pip install -U pip wheel setuptools
   - pip install -r requirements.txt
@@ -13,7 +14,7 @@ before_test:
   - scons --version
 
 build_script:
-  - python -m scons -j%NUMBER_OF_PROCESSORS% MSVC_VERSION=11.0
+  - scons -j%NUMBER_OF_PROCESSORS% MSVC_VERSION=11.0
 
 test_script:
   - pycodestyle . --max-line-length=120
