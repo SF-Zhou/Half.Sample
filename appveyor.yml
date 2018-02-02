@@ -1,0 +1,22 @@
+environment:
+  - PYTHON: "C:\\Python36"
+    SCONS_VERSION: "3.0.1"
+
+
+install:
+  - SET "PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - pip install -U pip
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+  - pip install "scons==%SCONS_VERSION%"
+
+before_test:
+  - python --version
+  - scons --version
+
+build:
+  - scons
+
+test_script:
+  - pycodestyle . --max-line-length=120
+  - python -m pytest
