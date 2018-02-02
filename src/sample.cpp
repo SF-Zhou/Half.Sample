@@ -1,6 +1,7 @@
 #include "constant.hpp"
 #include "result/sampling_result.hpp"
 #include "sampler/sampler_factory.hpp"
+#include "commander/commander.hpp"
 
 namespace Global {
     Result::SamplingResult result;
@@ -9,6 +10,5 @@ namespace Global {
 }
 
 int main() {
-    Global::config.update(2, 200);
-    Global::sampler->sample(Global::config, Global::result);
+    Commander::exec();
 }
