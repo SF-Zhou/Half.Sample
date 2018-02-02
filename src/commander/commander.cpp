@@ -21,7 +21,7 @@ void exec() {
         if (mapper.count(command)) {
             mapper[command]();
         } else {
-            Base::cmd_not_found();
+            Base::command_not_found();
         }
         Base::end();
     }

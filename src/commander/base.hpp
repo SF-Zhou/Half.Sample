@@ -35,13 +35,13 @@ class Base {
     #define variable(var) line(#var, var);
 
     // ### 1.3 Error & End Mark
-    static void error(std::string msg) {
+    static void error(std::string message) {
         line("error", true);
-        variable(msg);
+        variable(message);
     }
 
-    static void cmd_not_found() {
-        error("cmd_not_found");
+    static void command_not_found() {
+        error("command_not_found");
     }
 
     static void end() {

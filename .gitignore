@@ -34,3 +34,6 @@
 # Custom
 .sconsign.dblite
 build/
+.cache/
+.vscode/
+__pycache__/
