@@ -5,7 +5,8 @@ python:
 
 install: 
     - sudo apt-get install scons
-    - pip install typing st pycodestyle
+    - pip install -r requirements.txt
+    - pip install -r requirements-dev.txt
 
 script:
     - scons
