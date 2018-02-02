@@ -14,8 +14,8 @@ before_test:
   - python --version
   - scons --version
 
-build:
-  - scons
+build_script:
+  - scons -j%NUMBER_OF_PROCESSORS% MSVC_VERSION=11.0
 
 test_script:
   - pycodestyle . --max-line-length=120
