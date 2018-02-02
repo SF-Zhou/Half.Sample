@@ -1,6 +1,5 @@
 environment:
   PYTHON: "C:\\Python36"
-  SCONS_VERSION: "3.0.1"
 
 install:
   - SET "PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
@@ -14,7 +13,7 @@ before_test:
   - scons --version
 
 build_script:
-  - scons -j%NUMBER_OF_PROCESSORS% MSVC_VERSION=11.0
+  - python -m scons -j%NUMBER_OF_PROCESSORS% MSVC_VERSION=11.0
 
 test_script:
   - pycodestyle . --max-line-length=120
