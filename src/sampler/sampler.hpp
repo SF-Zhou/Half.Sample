@@ -1,6 +1,8 @@
 #ifndef SAMPLER_HPP
 #define SAMPLER_HPP
 
+#include <iostream>
+#include <memory>
 #include "sampler_config.hpp"
 #include "../result/sampling_result.hpp"
 

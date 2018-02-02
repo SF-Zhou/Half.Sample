@@ -1,0 +1,17 @@
+language: python
+
+python:
+    - "3.4"
+
+install: 
+    - sudo apt-get install scons
+    - pip install -r requirements.txt
+    - pip install -r requirements-dev.txt
+
+script:
+    - scons
+    - pycodestyle . --max-line-length=120
+    - python -m pytest
+
+notifications:
+    email: false
