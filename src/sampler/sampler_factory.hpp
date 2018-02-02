@@ -2,6 +2,7 @@
 #define SAMPLER_FACTORY_HPP
 
 #include <iostream>
+#include <string>
 #include "sampler.hpp"
 
 namespace Sampler {
