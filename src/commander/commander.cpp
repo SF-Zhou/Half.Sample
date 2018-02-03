@@ -18,7 +18,11 @@ void set_sampler() {
     std::cin >> sampler_name;
 
     Global::sampler = Sampler::SamplerFactory::get(sampler_name);
-    Base::variable(sampler_name);
+    if (Global::sampler.get()) {
+        Base::variable(sampler_name);
+    } else {
+        Base::error("sampler_not_found");
+    }
 }
 
 void get_sampler() {

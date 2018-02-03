@@ -15,13 +15,10 @@ class MyTestCase(unittest.TestCase):
         result = self.sampler.communicate("get_sampler")
         self.assertEqual(result.sampler_name, "mock_sampler")
 
-    def test_is_measuring(self):
-        result = self.sampler.communicate("is_measuring")
-        self.assertEqual(result.measuring, False)
-
-        result = self.sampler.communicate("to_measure 2 200")
-        self.assertEqual(result.error, False)
-        self.assertEqual(result.measuring, True)
+        try:
+            result = self.sampler.communicate("set_sampler unknown_sampler")
+        except self.sampler.Error as e:
+            self.assertEqual(str(e), "sampler_not_found")
 
 
 if __name__ == '__main__':
