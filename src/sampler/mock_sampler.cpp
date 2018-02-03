@@ -26,4 +26,8 @@ bool MockSampler::sample(const SamplerConfig &config, Result::SamplingResult &re
     return true;
 }
 
+std::string MockSampler::name() {
+    return "mock_sampler";
+}
+
 } // namespace Sampler
