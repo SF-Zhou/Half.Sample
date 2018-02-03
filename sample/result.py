@@ -4,3 +4,5 @@ class Result:
         self.message = ''
 
         self.sampler_name = ''
+        self.measuring = False
+        self.success = False

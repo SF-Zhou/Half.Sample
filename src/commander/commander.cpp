@@ -2,6 +2,7 @@
 #include <functional>
 #include <string>
 #include "commander.hpp"
+#include "measure.hpp"
 #include "../global/global.hpp"
 #include "../sampler/sampler_factory.hpp"
 
@@ -37,6 +38,9 @@ void exec() {
     add_func_into_mapper(simple_test, mapper);
     add_func_into_mapper(set_sampler, mapper);
     add_func_into_mapper(get_sampler, mapper);
+
+    add_func_into_mapper(to_measure, mapper);
+    add_func_into_mapper(is_measuring, mapper);
 
     std::string command;
     while (std::cin >> command) {

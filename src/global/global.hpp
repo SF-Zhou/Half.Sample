@@ -10,6 +10,9 @@ class Global {
     static Result::SamplingResult result;
     static Sampler::SamplerConfig config;
     static Sampler::SamplerPtr sampler;
+
+    static bool measuring;
+    static bool success;
 };
 
 #endif
