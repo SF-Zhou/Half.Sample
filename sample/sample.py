@@ -33,7 +33,7 @@ class Sample:
         setattr(self, 'p_', p)
         return p
 
-    def communicate(self, command: str, executor: st.Process=None):
+    def communicate(self, command: str, executor: st.Process=None) -> Result:
         executor = executor or self.p
 
         executor.write_line(command)
@@ -46,6 +46,19 @@ class Sample:
             raise self.Error(result.message)
 
         return result
+
+    @property
+    def is_measuring(self) -> bool:
+        return self.communicate('is_measuring').measuring
+
+    def measure(self, number_of_waveforms: int, emitting_frequency: float) -> None:
+        self.communicate("to_measure {} {:.2f}".format(number_of_waveforms, emitting_frequency))
+
+    def set_sampler(self, sampler_name: str):
+        self.communicate("set_sampler {}".format(sampler_name))
+
+    def query(self) -> Result:
+        return self.communicate("to_query")
 
     class Error(EnvironmentError):
         pass

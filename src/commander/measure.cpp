@@ -1,8 +1,26 @@
+#include <thread>
+#include <chrono>
 #include "measure.hpp"
 #include "base.hpp"
 #include "../global/global.hpp"
 
 namespace Commander {
+    void measure() {
+        bool &success = Global::success;
+        success = true;
+
+        do {
+            success = Global::sampler->sample(Global::config, Global::result);
+            if (!success) break;
+        } while (false);
+
+        Global::measuring = false;
+    }
+
+    void to_query() {
+        bool &success = Global::success;
+        Base::variable(success);
+    }
 
     void to_measure() {
         int number_of_waveforms;
@@ -21,6 +39,7 @@ namespace Commander {
         Base::variable(measuring);
 
         // start a thread to do measure
+        std::thread(measure).detach();
     }
 
     void is_measuring() {

@@ -1,3 +1,4 @@
+import time
 import sample
 import unittest
 
@@ -9,9 +10,15 @@ class MyTestCase(unittest.TestCase):
         result = self.sampler.communicate("is_measuring")
         self.assertEqual(result.measuring, False)
 
-        result = self.sampler.communicate("to_measure 2 200")
-        self.assertEqual(result.error, False)
-        self.assertEqual(result.measuring, True)
+    def test_simple_measure(self):
+        self.sampler.set_sampler(sampler_name="mock_sampler")
+        self.sampler.measure(number_of_waveforms=2, emitting_frequency=200)
+
+        while self.sampler.is_measuring:
+            time.sleep(0.1)
+
+        result = self.sampler.query()
+        self.assertEqual(result.success, True)
 
 
 if __name__ == '__main__':
