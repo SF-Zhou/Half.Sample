@@ -20,6 +20,9 @@ class MyTestCase(unittest.TestCase):
         result = self.sampler.query()
         self.assertEqual(result.success, True)
 
+        self.assertTrue(result.maximum > 4.0)
+        self.assertTrue(result.minimum < 1.0)
+
 
 if __name__ == '__main__':
     unittest.main()

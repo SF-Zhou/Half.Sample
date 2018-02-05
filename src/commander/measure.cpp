@@ -3,6 +3,7 @@
 #include "measure.hpp"
 #include "base.hpp"
 #include "../global/global.hpp"
+#include "../processer/processer.hpp"
 
 namespace Commander {
     void measure() {
@@ -12,14 +13,22 @@ namespace Commander {
         do {
             success = Global::sampler->sample(Global::config, Global::result);
             if (!success) break;
+
+            success = Processer::align(Global::config, Global::result);
+            if (!success) break;
         } while (false);
 
         Global::measuring = false;
     }
 
     void to_query() {
-        bool &success = Global::success;
+        bool success = Global::success;
         Base::variable(success);
+
+        double maximum = Global::result.maximum;
+        double minimum = Global::result.minimum;
+        Base::variable(maximum);
+        Base::variable(minimum);
     }
 
     void to_measure() {
