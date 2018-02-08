@@ -25,10 +25,15 @@ namespace Commander {
         bool success = Global::success;
         Base::variable(success);
 
-        double maximum = Global::result.maximum;
-        double minimum = Global::result.minimum;
-        Base::variable(maximum);
-        Base::variable(minimum);
+        if (success) {
+            double maximum = Global::result.maximum;
+            double minimum = Global::result.minimum;
+            Base::variable(maximum);
+            Base::variable(minimum);
+        } else {
+            std::string &message = Global::message;
+            Base::variable(message);
+        }
     }
 
     void to_measure() {
