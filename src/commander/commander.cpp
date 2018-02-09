@@ -35,6 +35,17 @@ void get_sampler() {
     Base::variable(sampler_name);
 }
 
+void set_mock_tau() {
+    double &mock_tau = Global::config.mock_tau;
+    std::cin >> mock_tau;
+    Base::variable(mock_tau);
+}
+
+void get_mock_tau() {
+    double &mock_tau = Global::config.mock_tau;
+    Base::variable(mock_tau);
+}
+
 void exec() {
     std::unordered_map<std::string, std::function<void (void)> > mapper;
 
@@ -42,6 +53,9 @@ void exec() {
     add_func_into_mapper(simple_test, mapper);
     add_func_into_mapper(set_sampler, mapper);
     add_func_into_mapper(get_sampler, mapper);
+
+    add_func_into_mapper(set_mock_tau, mapper);
+    add_func_into_mapper(get_mock_tau, mapper);
 
     add_func_into_mapper(to_query, mapper);
     add_func_into_mapper(to_measure, mapper);

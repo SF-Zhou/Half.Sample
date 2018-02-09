@@ -6,3 +6,5 @@ class Result:
         self.sampler_name = ''
         self.measuring = False
         self.success = False
+
+        self.mock_tau = 0.0
