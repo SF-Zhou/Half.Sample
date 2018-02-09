@@ -16,6 +16,12 @@ namespace Commander {
 
             success = Processer::align(Global::config, Global::result);
             if (!success) break;
+
+            success = Processer::summation(Global::config, Global::result);
+            if (!success) break;
+
+            success = Processer::average(Global::config, Global::result);
+            if (!success) break;
         } while (false);
 
         Global::measuring = false;

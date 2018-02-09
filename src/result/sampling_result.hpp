@@ -8,6 +8,7 @@ namespace Result {
 struct SamplingResult {
     double buffer[Constant::MaxBufferSize];
     double wave[Constant::MaxBufferSize / 16];
+    double average[Constant::MaxBufferSize / 16];
 
     double maximum, minimum;
 };

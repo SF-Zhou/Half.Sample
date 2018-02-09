@@ -8,6 +8,8 @@ namespace Commander {
 namespace Processer {
 
 bool align(const Sampler::SamplerConfig &config, Result::SamplingResult &result);
+bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &result);
+bool average(const Sampler::SamplerConfig &config, Result::SamplingResult &result);
 
 } // namespace Processer
 } // namespace Commander
