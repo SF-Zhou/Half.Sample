@@ -23,6 +23,12 @@ bool MockSampler::sample(const SamplerConfig &config, Result::SamplingResult &re
         }
     }
 
+    // random noise
+    const double noise_amplitude = 1.0;
+    for (int i = 0; i < config.sampling_length; i++) {
+        buffer[i] += (rand() / double(RAND_MAX) - 0.5) * noise_amplitude;
+    }
+
     return true;
 }
 
