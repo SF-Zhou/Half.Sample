@@ -1,4 +1,5 @@
 #include <cmath>
+#include <ctime>
 #include <iostream>
 #include "mock_sampler.hpp"
 
@@ -24,9 +25,17 @@ bool MockSampler::sample(const SamplerConfig &config, Result::SamplingResult &re
     }
 
     // random noise
+    srand(time(0));
     const double noise_amplitude = 1.0;
     for (int i = 0; i < config.sampling_length; i++) {
         buffer[i] += (rand() / double(RAND_MAX) - 0.5) * noise_amplitude;
+    }
+
+    // vertical shift
+    const double max_shift_amplitude = -2.5;
+    const double shift_amplitude = rand() / double(RAND_MAX) * max_shift_amplitude;
+    for (int i = 0; i < config.sampling_length; i++) {
+        buffer[i] += shift_amplitude;
     }
 
     return true;
