@@ -29,14 +29,22 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
         result.wave[j] = 0;
     }
 
+    double base_sum = 0;
+    int base_count = 0;
+
     int copy_times = 0;
-    bool under_lower_bound = true;
-    for (int i = 0; i < config.sampling_length; i ++) {
+    bool under_lower_bound = false;
+    for (int i = Constant::CroppedLength; i < config.sampling_length; i ++) {
         const double &value = result.buffer[i];
 
         if (under_lower_bound) {
             if (value >= current_upper_bound) {
                 under_lower_bound = false;
+
+                for (int j = 0; j < Constant::CroppedLength / 2; j ++) {
+                    base_sum += result.buffer[i - Constant::CroppedLength + j];
+                    base_count++;
+                }
 
                 if (i + config.valid_length < config.sampling_length) {
                     for (int j = 0; j < config.valid_length; j ++) {
@@ -50,8 +58,9 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
         }
     }
 
+    const double base_value = base_count ? base_sum / base_count : 0;
     for (int j = 0; j < config.valid_length; j ++) {
-        result.wave[j] /= copy_times;
+        result.wave[j] = result.wave[j] / copy_times - base_value;
     }
     return true;
 }
