@@ -50,7 +50,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
         }
     }
 
-    for (int j = 0; j < copy_times; j ++) {
+    for (int j = 0; j < config.waveform_length; j ++) {
         result.wave[j] /= copy_times;
     }
     return true;
