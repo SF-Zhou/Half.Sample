@@ -57,6 +57,19 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
 }
 
 bool average(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+    result.average_length = 0;
+    int average_times = config.waveform_length / Constant::MaxAverageSize + 1;
+
+    for (int i = average_times; i <= config.waveform_length; i += average_times) {
+        double sum = 0;
+
+        for (int j = i - average_times; j < i; j ++) {
+            sum += result.wave[j];
+        }
+
+        result.average[result.average_length ++] = sum / average_times;
+    }
+
     return true;
 }
 

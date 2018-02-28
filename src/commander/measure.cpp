@@ -36,6 +36,12 @@ namespace Commander {
             double minimum = Global::result.minimum;
             Base::variable(maximum);
             Base::variable(minimum);
+
+            printf("average = [");
+            for (int i = 0; i < Global::result.average_length; i ++) {
+                printf("%.3f,", Global::result.average[i]);
+            }
+            printf("]\n");
         } else {
             std::string &message = Global::message;
             Base::variable(message);

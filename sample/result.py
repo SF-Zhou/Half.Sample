@@ -7,4 +7,6 @@ class Result:
         self.measuring = False
         self.success = False
 
+        self.average = []
+
         self.mock_tau = 0.0

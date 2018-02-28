@@ -12,6 +12,10 @@ class MyTestCase(unittest.TestCase):
 
     def test_simple_measure(self):
         self.sampler.set_sampler(sampler_name="mock_sampler")
+
+        mock_tau = 100
+        self.sampler.communicate("set_mock_tau {}".format(mock_tau))
+
         self.sampler.measure(number_of_waveforms=2, emitting_frequency=200)
 
         while self.sampler.is_measuring:
@@ -22,6 +26,8 @@ class MyTestCase(unittest.TestCase):
 
         self.assertTrue(result.maximum > 4.0)
         self.assertTrue(result.minimum < 1.0)
+
+        self.assertTrue(0 < len(result.average) <= 1000)
 
 
 if __name__ == '__main__':
