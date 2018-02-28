@@ -9,6 +9,7 @@ struct SamplerConfig {
 
     int sampling_length;
     int waveform_length;
+    int valid_length;
     int number_of_waveforms;
 
     double mock_tau;  // us

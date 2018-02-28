@@ -38,8 +38,8 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
             if (value >= current_upper_bound) {
                 under_lower_bound = false;
 
-                if (i + config.waveform_length < config.sampling_length) {
-                    for (int j = 0; j < config.waveform_length; j ++) {
+                if (i + config.valid_length < config.sampling_length) {
+                    for (int j = 0; j < config.valid_length; j ++) {
                         result.wave[j] += result.buffer[i + j];
                     }
                     copy_times ++;
@@ -50,7 +50,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
         }
     }
 
-    for (int j = 0; j < config.waveform_length; j ++) {
+    for (int j = 0; j < config.valid_length; j ++) {
         result.wave[j] /= copy_times;
     }
     return true;
@@ -58,9 +58,9 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
 
 bool average(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
     result.average_length = 0;
-    int average_times = config.waveform_length / Constant::MaxAverageSize + 1;
+    int average_times = config.valid_length / Constant::MaxAverageSize + 1;
 
-    for (int i = average_times; i <= config.waveform_length; i += average_times) {
+    for (int i = average_times; i <= config.valid_length; i += average_times) {
         double sum = 0;
 
         for (int j = i - average_times; j < i; j ++) {
