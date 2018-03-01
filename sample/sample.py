@@ -58,7 +58,9 @@ class Sample:
         self.communicate("set_sampler {}".format(sampler_name))
 
     def query(self) -> Result:
-        return self.communicate("to_query")
+        result = self.communicate("to_query")
+        result.process()
+        return result
 
     class Error(EnvironmentError):
         pass

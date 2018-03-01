@@ -25,7 +25,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
     const double current_lower_bound = minimum + (maximum - minimum) * Constant::LowerBound;
     const double current_upper_bound = minimum + (maximum - minimum) * Constant::UpperBound;
 
-    for (int j = 0; j < config.waveform_length; j ++) {
+    for (int j = 0; j < config.valid_length; j ++) {
         result.wave[j] = 0;
     }
 
@@ -68,6 +68,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
 bool average(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
     result.average_length = 0;
     int average_times = config.valid_length / Constant::MaxAverageSize + 1;
+    result.average_interval = config.sampling_interval * average_times;
 
     for (int i = average_times; i <= config.valid_length; i += average_times) {
         double sum = 0;

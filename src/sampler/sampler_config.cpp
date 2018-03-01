@@ -13,6 +13,7 @@ namespace Sampler {
             this->sampling_frequency = Constant::MinSamplingFrequency;
         }
 
+        this->sampling_interval = 1e6 / this->sampling_frequency;
         this->waveform_length = int(sampling_frequency / emitting_frequency);
         this->sampling_length = this->waveform_length * (number_of_waveforms + 1);
 

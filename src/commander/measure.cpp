@@ -37,6 +37,11 @@ namespace Commander {
             Base::variable(maximum);
             Base::variable(minimum);
 
+            const double sampling_interval = Global::config.sampling_interval;
+            Base::variable(sampling_interval);
+            const double average_interval = Global::result.average_interval;
+            Base::variable(average_interval);
+
             printf("average = [");
             for (int i = 0; i < Global::result.average_length; i ++) {
                 printf("%.3f,", Global::result.average[i]);

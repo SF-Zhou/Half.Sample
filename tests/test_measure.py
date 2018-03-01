@@ -13,7 +13,7 @@ class MyTestCase(unittest.TestCase):
     def test_simple_measure(self):
         self.sampler.set_sampler(sampler_name="mock_sampler")
 
-        mock_tau = 1000
+        mock_tau = 100
         self.sampler.communicate("set_mock_tau {}".format(mock_tau))
 
         self.sampler.measure(number_of_waveforms=2, emitting_frequency=200)

@@ -6,6 +6,7 @@ namespace Sampler {
 struct SamplerConfig {
     double sampling_frequency;  // Hz
     double emitting_frequency;  // Hz
+    double sampling_interval;  // us
 
     int sampling_length;
     int waveform_length;
