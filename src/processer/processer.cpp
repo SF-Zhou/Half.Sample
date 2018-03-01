@@ -100,14 +100,14 @@ bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &resu
             auto estimated_result = Estimate::one_third_search(wave);
             auto y = estimated_result.y;
 
-            int a = -estimated_result.w;
-            int b = estimated_result.margin();
+            double a = -estimated_result.w;
+            double b = estimated_result.margin();
 
             if (a <= 0 || b <= 0) {
                 continue;
             }
 
-            int f1_score = a * b / (a + b);
+            double f1_score = a * b / (a + b);
             results[-f1_score] = estimated_result;
 
             frequency *= 2;
