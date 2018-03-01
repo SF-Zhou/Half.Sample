@@ -1,11 +1,9 @@
-import sample
 import unittest
+from sample import sampler
 
 
 class MyTestCase(unittest.TestCase):
     def test_commander_frame(self):
-        sampler = sample.Sample()
-
         result = sampler.communicate("simple_test")
         self.assertTrue(result.success)
 

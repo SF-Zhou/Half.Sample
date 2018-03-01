@@ -1,2 +1,2 @@
 from .result import Result
-from .sample import Sample
+from .sample import Sampler, sampler

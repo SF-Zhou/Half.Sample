@@ -4,7 +4,7 @@ import subprocess
 from . import Result
 
 
-class Sample:
+class Sampler:
     @property
     def execution_path(self) -> str:
         main_path = os.path.join(os.path.dirname(__file__), '..')
@@ -64,3 +64,6 @@ class Sample:
 
     class Error(EnvironmentError):
         pass
+
+
+sampler = Sampler()
