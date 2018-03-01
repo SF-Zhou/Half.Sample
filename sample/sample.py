@@ -18,10 +18,9 @@ class Sampler:
         if not os.path.exists(execution_name):
             execution_name = os.path.join(main_path, 'build', execution_name)
         if not os.path.exists(execution_name):
-            print(execution_name)
             raise self.Error('Sample Driver Not Found')
 
-        return execution_name
+        return os.path.abspath(execution_name)
 
     @property
     def p(self) -> st.Process:
@@ -62,7 +61,7 @@ class Sampler:
         result.process()
         return result
 
-    class Error(EnvironmentError):
+    class Error(RuntimeError):
         pass
 
 
