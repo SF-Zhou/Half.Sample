@@ -95,7 +95,12 @@ bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &resu
     if (Global::auto_mode) {
         std::map<double, Estimate::EstimatedResult> results;
 
-        for (double frequency = config.emitting_frequency; frequency <= 20480; frequency *= 2) {
+        double frequency_upper_bound = 20480;
+        if (config.emitting_frequency < 10) {
+            frequency_upper_bound = 8;
+        }
+
+        for (double frequency = config.emitting_frequency; frequency <= frequency_upper_bound; frequency *= 2) {
             auto wave = average(config, result, frequency);
             auto estimated_result = Estimate::one_third_search(wave);
             auto y = estimated_result.y;

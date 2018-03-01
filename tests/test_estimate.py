@@ -35,6 +35,26 @@ class MyTestCase(unittest.TestCase):
 
             self.assertTrue(diff_ratio <= 0.1)
 
+    def test_low_frequency(self):
+        sampler.set_sampler(sampler_name="mock_sampler")
+
+        mock_taus = [20000, 40000, 80000, 100000]  # us
+        for mock_tau in mock_taus:
+            sampler.communicate('set_mock_tau {}'.format(mock_tau))
+
+            sampler.measure(number_of_waveforms=4, emitting_frequency=10, auto_mode=True)
+            while sampler.is_measuring:
+                time.sleep(0.1)
+            result = sampler.query()
+            self.assertTrue(result.tau >= 10000)
+
+            sampler.measure(number_of_waveforms=4, emitting_frequency=0.5, auto_mode=True)
+            while sampler.is_measuring:
+                time.sleep(0.1)
+            result = sampler.query()
+            diff_ratio = abs(result.tau - mock_tau) / mock_tau
+            self.assertTrue(diff_ratio <= 0.01)  # less than 1%
+
 
 if __name__ == '__main__':
     unittest.main()
