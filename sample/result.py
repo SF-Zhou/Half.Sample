@@ -1,3 +1,6 @@
+import math
+
+
 class Result:
     def __init__(self):
         self.error = False
@@ -11,8 +14,18 @@ class Result:
         self.average_interval = 0.0   # us
         self.average = []
         self.time_line = []
+        self.estimate = []
+
+        self.tau = 0.0
+        self.w = 0.0
+        self.b = 0.0
+        self.loss = 0.0
 
         self.mock_tau = 0.0
 
     def process(self):
         self.time_line = [self.average_interval * i for i in range(len(self.average))]
+
+        if self.success:
+            tau, w, b = self.tau, self.w, self.b
+            self.estimate = [w * math.exp(t / -tau) + b for t in self.time_line]

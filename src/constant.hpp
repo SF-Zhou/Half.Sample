@@ -13,6 +13,8 @@ namespace Constant {
     const double MinVoltageAmplitude = 0.4;  // unit: V
     const double UpperBound = 0.4;  // percent
     const double LowerBound = 0.1;  // percent
+
+    const double SearchEpsilon = 1e-2;
 }
 
 #endif

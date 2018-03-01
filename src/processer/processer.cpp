@@ -2,6 +2,7 @@
 #include "processer.hpp"
 #include "../constant.hpp"
 #include "../global/global.hpp"
+#include "../estimate/estimate.hpp"
 
 namespace Commander {
 namespace Processer {
@@ -62,6 +63,20 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
     for (int j = 0; j < config.valid_length; j ++) {
         result.wave[j] = result.wave[j] / copy_times - base_value;
     }
+    return true;
+}
+
+bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+    average(config, result);
+
+    VectorPtr x(new Vector(result.average_length));
+    VectorPtr y(new Vector(result.average_length));
+    for (int i = 0; i < result.average_length; i ++) {
+        (*x)[i] = i * result.average_interval;
+        (*y)[i] = result.average[i];
+    }
+
+    result.estimate = Estimate::one_third_search(x, y);
     return true;
 }
 

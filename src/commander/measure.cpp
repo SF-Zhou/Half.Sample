@@ -20,7 +20,7 @@ namespace Commander {
             success = Processer::summation(Global::config, Global::result);
             if (!success) break;
 
-            success = Processer::average(Global::config, Global::result);
+            success = Processer::estimate(Global::config, Global::result);
             if (!success) break;
         } while (false);
 
@@ -41,6 +41,15 @@ namespace Commander {
             Base::variable(sampling_interval);
             const double average_interval = Global::result.average_interval;
             Base::variable(average_interval);
+
+            const double tau = Global::result.estimate.tau;
+            Base::variable(tau);
+            const double w = Global::result.estimate.w;
+            Base::variable(w);
+            const double b = Global::result.estimate.b;
+            Base::variable(b);
+            const double loss = Global::result.estimate.loss;
+            Base::variable(loss);
 
             printf("average = [");
             for (int i = 0; i < Global::result.average_length; i ++) {

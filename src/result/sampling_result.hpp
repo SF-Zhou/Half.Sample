@@ -2,6 +2,7 @@
 #define SAMPLING_RESULT_HPP
 
 #include "../constant.hpp"
+#include "../estimate/estimate.hpp"
 
 namespace Result {
 
@@ -12,6 +13,8 @@ struct SamplingResult {
     double average[Constant::MaxAverageSize];
     double average_interval;
     int average_length;
+
+    Estimate::EstimatedResult estimate;
 
     double maximum, minimum;
 };
