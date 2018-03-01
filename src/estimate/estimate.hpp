@@ -9,17 +9,17 @@ struct EstimatedResult {
     double tau;
     double w, b;
     double loss;
-    VectorPtr x;
+    double interval;
     VectorPtr y;
 
     EstimatedResult() {};
-    EstimatedResult(VectorPtr x, VectorPtr y, double tau);
+    EstimatedResult(Waveform wave, double tau);
 
     void calculate_para();
     void calculate_loss();
 };
 
-EstimatedResult one_third_search(VectorPtr x, VectorPtr y);
+EstimatedResult one_third_search(Waveform wave);
 
 } // namespace Estimate
 

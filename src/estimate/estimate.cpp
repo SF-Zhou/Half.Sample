@@ -4,7 +4,7 @@
 
 namespace Estimate {
 
-    EstimatedResult::EstimatedResult(VectorPtr x, VectorPtr y, double tau): tau(tau), x(x), y(y) {
+    EstimatedResult::EstimatedResult(Waveform wave, double tau): tau(tau), y(wave.values), interval(wave.interval) {
         calculate_para();
         calculate_loss();
     };
@@ -16,7 +16,7 @@ namespace Estimate {
         double sum_xx = 0, sum_xy = 0;
 
         for (int i = 0; i < m ; i++) {
-            double vx = exp((*x)[i] / -tau);
+            double vx = exp(i * interval / -tau);
             double vy = (*y)[i];
 
             sum_x += vx;
@@ -37,21 +37,21 @@ namespace Estimate {
 
         double loss_sum = 0;
         for (int i = 0; i < m; i++) {
-            loss_sum += pow(exp((*x)[i] / -tau) * w + b - (*y)[i], 2);
+            loss_sum += pow(exp(i * interval / -tau) * w + b - (*y)[i], 2);
         }
 
         loss = loss_sum / m;
     }
 
-    EstimatedResult one_third_search(VectorPtr x, VectorPtr y) {
+    EstimatedResult one_third_search(Waveform wave) {
         double l = 0.01, r = 1e4;  // range of tau
 
         while (l + Constant::SearchEpsilon < r) {
             double tau_l = (l + l + r) / 3;
             double tau_r = (l + r + r) / 3;
 
-            EstimatedResult estimate_l(x, y, tau_l);
-            EstimatedResult estimate_r(x, y, tau_r);
+            EstimatedResult estimate_l(wave, tau_l);
+            EstimatedResult estimate_r(wave, tau_r);
 
             if (estimate_l.loss < estimate_r.loss) {
                 r = tau_r;
@@ -60,7 +60,7 @@ namespace Estimate {
             }
         }
 
-        return EstimatedResult(x, y, (l + r) / 2);
+        return EstimatedResult(wave, (l + r) / 2);
     }
 
 } // namespace Estimate

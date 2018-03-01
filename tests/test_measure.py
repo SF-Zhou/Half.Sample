@@ -22,8 +22,8 @@ class MyTestCase(unittest.TestCase):
         result = sampler.query()
         self.assertEqual(result.success, True)
 
-        self.assertTrue(0 < len(result.average) <= 1000)
-        self.assertTrue(2.3 < result.average[0] < 2.7)
+        self.assertTrue(0 < len(result.wave) <= 1000)
+        self.assertTrue(2.3 < result.wave[0] < 2.7)
 
 
 if __name__ == '__main__':

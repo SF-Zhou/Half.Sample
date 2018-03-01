@@ -11,8 +11,8 @@ class Result:
         self.success = False
 
         self.sampling_interval = 0.0  # us
-        self.average_interval = 0.0   # us
-        self.average = []
+        self.wave_interval = 0.0   # us
+        self.wave = []
         self.time_line = []
         self.estimate = []
 
@@ -24,7 +24,7 @@ class Result:
         self.mock_tau = 0.0
 
     def process(self):
-        self.time_line = [self.average_interval * i for i in range(len(self.average))]
+        self.time_line = [self.wave_interval * i for i in range(len(self.wave))]
 
         if self.success:
             tau, w, b = self.tau, self.w, self.b

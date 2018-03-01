@@ -1,3 +1,4 @@
+#include <cmath>
 #include <algorithm>
 #include "processer.hpp"
 #include "../constant.hpp"
@@ -66,35 +67,36 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
     return true;
 }
 
-bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
-    average(config, result);
+Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &result, const double frequency) {
+    int length = round(config.sampling_frequency / frequency / 2);
+    length = std::min(length, config.valid_length);
 
-    VectorPtr x(new Vector(result.average_length));
-    VectorPtr y(new Vector(result.average_length));
-    for (int i = 0; i < result.average_length; i ++) {
-        (*x)[i] = i * result.average_interval;
-        (*y)[i] = result.average[i];
-    }
+    int merged_size = length / Constant::MaxAverageSize + 1;
+    int merged_length = length / merged_size;
+    double interval = config.sampling_interval * merged_size;
 
-    result.estimate = Estimate::one_third_search(x, y);
-    return true;
-}
+    VectorPtr merged_wave(new Vector(merged_length));
+    for (int i = 0; i < merged_length; i++) {
+        int current = i * merged_size;
 
-bool average(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
-    result.average_length = 0;
-    int average_times = config.valid_length / Constant::MaxAverageSize + 1;
-    result.average_interval = config.sampling_interval * average_times;
-
-    for (int i = average_times; i <= config.valid_length; i += average_times) {
         double sum = 0;
-
-        for (int j = i - average_times; j < i; j ++) {
-            sum += result.wave[j];
+        for (int j = 0; j < merged_size; j++) {
+            sum += result.wave[current + j];
         }
 
-        result.average[result.average_length ++] = sum / average_times;
+        (*merged_wave)[i] = sum / merged_size;
     }
 
+    return Waveform({merged_wave, interval});
+}
+
+bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+    if (Global::auto_mode) {
+
+    } else {
+        auto wave = average(config, result, config.emitting_frequency);
+        result.estimate = Estimate::one_third_search(wave);
+    }
     return true;
 }
 

@@ -39,8 +39,8 @@ namespace Commander {
 
             const double sampling_interval = Global::config.sampling_interval;
             Base::variable(sampling_interval);
-            const double average_interval = Global::result.average_interval;
-            Base::variable(average_interval);
+            const double wave_interval = Global::result.estimate.interval;
+            Base::variable(wave_interval);
 
             const double tau = Global::result.estimate.tau;
             Base::variable(tau);
@@ -51,9 +51,10 @@ namespace Commander {
             const double loss = Global::result.estimate.loss;
             Base::variable(loss);
 
-            printf("average = [");
-            for (int i = 0; i < Global::result.average_length; i ++) {
-                printf("%.3f,", Global::result.average[i]);
+            printf("wave = [");
+            auto values = *Global::result.estimate.y;
+            for (int i = 0; i < values.size(); i ++) {
+                printf("%.3f,", values[i]);
             }
             printf("]\n");
         } else {
