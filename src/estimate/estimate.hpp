@@ -17,6 +17,8 @@ struct EstimatedResult {
 
     void calculate_para();
     void calculate_loss();
+
+    double margin();
 };
 
 EstimatedResult one_third_search(Waveform wave);

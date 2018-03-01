@@ -43,6 +43,13 @@ namespace Estimate {
         loss = loss_sum / m;
     }
 
+    double EstimatedResult::margin() {
+        int m = y->size();
+        double minimum = b + w;
+        double maximum = b + w * exp(m * interval / -tau);
+        return maximum - minimum;
+    }
+
     EstimatedResult one_third_search(Waveform wave) {
         double l = 0.01, r = 1e4;  // range of tau
 

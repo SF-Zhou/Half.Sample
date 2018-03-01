@@ -1,3 +1,4 @@
+#include <map>
 #include <cmath>
 #include <algorithm>
 #include "processer.hpp"
@@ -92,7 +93,31 @@ Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &r
 
 bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
     if (Global::auto_mode) {
+        std::map<double, Estimate::EstimatedResult> results;
 
+        for (double frequency = config.emitting_frequency; frequency <= 20480; frequency *= 2) {
+            auto wave = average(config, result, frequency);
+            auto estimated_result = Estimate::one_third_search(wave);
+            auto y = estimated_result.y;
+
+            int a = -estimated_result.w;
+            int b = estimated_result.margin();
+
+            if (a <= 0 || b <= 0) {
+                continue;
+            }
+
+            int f1_score = a * b / (a + b);
+            results[-f1_score] = estimated_result;
+
+            frequency *= 2;
+        }
+
+        if (results.size() == 0) {
+            return false;
+        }
+
+        result.estimate = results.begin() -> second;
     } else {
         auto wave = average(config, result, config.emitting_frequency);
         result.estimate = Estimate::one_third_search(wave);
