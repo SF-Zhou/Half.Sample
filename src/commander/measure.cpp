@@ -65,8 +65,12 @@ namespace Commander {
     void to_measure() {
         int number_of_waveforms;
         double emitting_frequency;
+        std::string mode;
         std::cin >> number_of_waveforms;
         std::cin >> emitting_frequency;
+        std::cin >> mode;
+
+        Global::auto_mode =  (mode == "True");
         Global::config.update(number_of_waveforms, emitting_frequency);
 
         bool &measuring = Global::measuring;

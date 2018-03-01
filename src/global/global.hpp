@@ -13,6 +13,7 @@ class Global {
 
     static bool measuring;
     static bool success;
+    static bool auto_mode;
     static std::string message;
 };
 

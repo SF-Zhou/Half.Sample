@@ -50,8 +50,8 @@ class Sampler:
     def is_measuring(self) -> bool:
         return self.communicate('is_measuring').measuring
 
-    def measure(self, number_of_waveforms: int, emitting_frequency: float) -> None:
-        self.communicate("to_measure {} {:.2f}".format(number_of_waveforms, emitting_frequency))
+    def measure(self, number_of_waveforms: int, emitting_frequency: float, auto_mode: bool = False) -> None:
+        self.communicate("to_measure {} {:.2f} {}".format(number_of_waveforms, emitting_frequency, auto_mode))
 
     def set_sampler(self, sampler_name: str):
         self.communicate("set_sampler {}".format(sampler_name))
