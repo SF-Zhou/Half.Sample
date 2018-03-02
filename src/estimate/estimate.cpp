@@ -51,7 +51,7 @@ namespace Estimate {
     }
 
     EstimatedResult one_third_search(Waveform wave) {
-        double l = 0.01, r = 1e5;  // range of tau
+        double l = Constant::MinTauValue / 10, r = Constant::MaxTauValue * 2;  // range of tau
 
         while (l + Constant::SearchEpsilon < r) {
             double tau_l = (l + l + r) / 3;

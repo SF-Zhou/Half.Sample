@@ -15,6 +15,9 @@ namespace Constant {
     const double LowerBound = 0.1;  // percent
 
     const double SearchEpsilon = 1e-2;
+
+    const double MinTauValue = 0.5;
+    const double MaxTauValue = 2e5;
 }
 
 #endif

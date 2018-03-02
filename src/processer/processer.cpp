@@ -51,7 +51,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
 
                 if (i + config.valid_length < config.sampling_length) {
                     for (int j = 0; j < config.valid_length; j ++) {
-                        result.wave[j] += result.buffer[i + j];
+                        result.wave[j] += result.buffer[i++];
                     }
                     copy_times ++;
                 }
@@ -108,7 +108,7 @@ bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &resu
             double a = -estimated_result.w;
             double b = estimated_result.margin();
 
-            if (a <= 0 || b <= 0) {
+            if (a <= 0 || b <= 0 || estimated_result.tau < Constant::MinTauValue) {
                 continue;
             }
 
