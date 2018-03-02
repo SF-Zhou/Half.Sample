@@ -69,7 +69,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
 }
 
 Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &result, const double frequency) {
-    int length = round(config.sampling_frequency / frequency / 2);
+    int length = int(config.sampling_frequency / frequency / 2);
     length = std::min(length, config.valid_length);
 
     int merged_size = length / Constant::MaxAverageSize + 1;
@@ -88,7 +88,7 @@ Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &r
         (*merged_wave)[i] = sum / merged_size;
     }
 
-    return Waveform({merged_wave, interval});
+    return Waveform(merged_wave, interval);
 }
 
 bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
