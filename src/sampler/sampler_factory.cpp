@@ -1,6 +1,10 @@
 #include "sampler_factory.hpp"
 #include "mock_sampler.hpp"
 
+#ifdef _WIN32
+    #include "real_sampler.hpp"
+#endif
+
 namespace Sampler {
 
 SamplerPtr SamplerFactory::get(std::string sampler_name) {
@@ -9,6 +13,12 @@ SamplerPtr SamplerFactory::get(std::string sampler_name) {
     if (sampler_name == "mock_sampler") {
         sampler.reset(new MockSampler);
     }
+
+#ifdef _WIN32
+    if (sampler_name == "real_sampler") {
+        sampler.reset(new RealSampler);
+    }
+#endif
 
     return sampler;
 }

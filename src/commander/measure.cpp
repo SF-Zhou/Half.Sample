@@ -1,9 +1,14 @@
-#include <thread>
-#include <chrono>
 #include "measure.hpp"
 #include "base.hpp"
 #include "../global/global.hpp"
 #include "../processer/processer.hpp"
+
+#ifdef _WIN32
+    #include "Windows.h"
+#else
+    #include <thread>
+    #include <chrono>
+#endif
 
 namespace Commander {
     void measure() {
@@ -26,6 +31,13 @@ namespace Commander {
 
         Global::measuring = false;
     }
+
+#ifdef _WIN32
+    DWORD WINAPI measure(void *) {
+        measure();
+        return 0;
+    }
+#endif
 
     void to_query() {
         bool success = Global::success;
@@ -83,8 +95,13 @@ namespace Commander {
         measuring = true;
         Base::variable(measuring);
 
-        // start a thread to do measure
-        std::thread(measure).detach();
+        #ifdef _WIN32
+            DWORD handle;
+            CreateThread(NULL, 0, measure, NULL, 0, &handle);
+        #else
+            // start a thread to do measure
+            std::thread(measure).detach();
+        #endif
     }
 
     void is_measuring() {
