@@ -23,6 +23,20 @@ class MyTestCase(unittest.TestCase):
         result = sampler.communicate("get_mock_tau")
         self.assertEqual(result.mock_tau, mock_tau)
 
+    def test_mock_voltage_set_get(self):
+        mock_v0, mock_v_inf = 4.0, 6.0
+        result = sampler.communicate("set_mock_voltage {} {}".format(mock_v0, mock_v_inf))
+        self.assertEqual(result.mock_v0, mock_v0)
+        self.assertEqual(result.mock_v_inf, mock_v_inf)
+
+        result = sampler.communicate("get_mock_voltage")
+        self.assertEqual(result.mock_v0, mock_v0)
+        self.assertEqual(result.mock_v_inf, mock_v_inf)
+
+        # recovery
+        mock_v0, mock_v_inf = 2.5, 5.0
+        result = sampler.communicate("set_mock_voltage {} {}".format(mock_v0, mock_v_inf))
+
 
 if __name__ == '__main__':
     unittest.main()

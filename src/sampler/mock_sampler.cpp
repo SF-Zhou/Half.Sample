@@ -13,11 +13,13 @@ bool MockSampler::sample(const SamplerConfig &config, Result::SamplingResult &re
 
         for (int j = 0; j < config.waveform_length; j++) {
             if (j < 5) {
-                current[j] = j * 0.5;
+                current[j] = j * config.mock_v0 / 5;
             } else if (j < config.waveform_length / 2) {
-                current[j] = 5.0 - 2.5 * exp((5 - j) * config.sampling_interval / config.mock_tau);
+                double b = config.mock_v_inf;
+                double w = config.mock_v0 - b;
+                current[j] = b + w * exp((5 - j) * config.sampling_interval / config.mock_tau);
             } else if (j < config.waveform_length / 2 + 5) {
-                current[j] = (5 - j + config.waveform_length / 2) * 1.0;
+                current[j] = (5 - j + config.waveform_length / 2) * config.mock_v_inf / 5;
             } else {
                 current[j] = 0;
             }

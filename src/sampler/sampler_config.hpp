@@ -14,7 +14,10 @@ struct SamplerConfig {
     int number_of_waveforms;
 
     double mock_tau;  // us
+    double mock_v0;  // V
+    double mock_v_inf;  // V
 
+    SamplerConfig();
     void update(int number_of_waveforms, double emitting_frequency);
 };
 

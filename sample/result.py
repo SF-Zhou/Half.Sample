@@ -22,6 +22,8 @@ class Result:
         self.loss = 0.0
 
         self.mock_tau = 0.0
+        self.mock_v0 = 0.0
+        self.mock_v_inf = 0.0
 
     def process(self):
         self.time_line = [self.wave_interval * i for i in range(len(self.wave))]
