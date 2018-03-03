@@ -22,6 +22,7 @@ struct EstimatedResult {
 };
 
 EstimatedResult one_third_search(Waveform wave);
+bool is_wave_going_down(Waveform wave);
 
 } // namespace Estimate
 

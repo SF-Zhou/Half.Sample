@@ -70,4 +70,28 @@ namespace Estimate {
         return EstimatedResult(wave, (l + r) / 2);
     }
 
+    bool is_wave_going_down(Waveform wave) {
+        const auto &y = *wave.values;
+        int m = y.size();
+
+        double sum_x = 0, sum_y = 0;
+        double sum_xx = 0, sum_xy = 0;
+
+        for (int i = m / 3 * 2; i < m ; i++) {
+            double vx = i;
+            double vy = y[i];
+
+            sum_x += vx;
+            sum_y += vy;
+            sum_xx += vx * vx;
+            sum_xy += vx * vy;
+        }
+
+        double mean_x = sum_x / m;
+        double mean_y = sum_y / m;
+
+        double w = (sum_xy / m - mean_x * mean_y) / (sum_xx / m - mean_x * mean_x);
+        return w * (m / 3) <= Constant::WaveGoingDownThreshold;
+    }
+
 } // namespace Estimate

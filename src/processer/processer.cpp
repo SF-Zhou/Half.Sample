@@ -102,6 +102,10 @@ bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &resu
 
         for (double frequency = config.emitting_frequency; frequency <= frequency_upper_bound; frequency *= 2) {
             auto wave = average(config, result, frequency);
+            if (Estimate::is_wave_going_down(wave)) {
+                continue;
+            }
+
             auto estimated_result = Estimate::one_third_search(wave);
             auto y = estimated_result.y;
 

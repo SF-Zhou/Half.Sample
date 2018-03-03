@@ -16,8 +16,10 @@ namespace Constant {
 
     const double SearchEpsilon = 1e-2;
 
-    const double MinTauValue = 0.5;
-    const double MaxTauValue = 2e5;
+    const double MinTauValue = 0.5;  // V
+    const double MaxTauValue = 2e5;  // V
+
+    const double WaveGoingDownThreshold = 0.5;  // V
 }
 
 #endif

@@ -64,7 +64,7 @@ namespace Commander {
             Base::variable(loss);
 
             printf("wave = [");
-            auto values = *Global::result.estimate.y;
+            const auto &values = *Global::result.estimate.y;
             for (int i = 0; i < values.size(); i ++) {
                 printf("%.3f,", values[i]);
             }
