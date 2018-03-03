@@ -35,41 +35,18 @@ void get_sampler() {
     Base::variable(sampler_name);
 }
 
-void set_mock_tau() {
-    double &mock_tau = Global::config.mock_tau;
-    std::cin >> mock_tau;
-    Base::variable(mock_tau);
+void set_sampler_value() {
+    std::string key;
+    double value;
+    std::cin >> key >> value;
+    Global::sampler->set_value(key, value);
+    Base::line(key, Global::sampler->get_value(key));
 }
 
-void get_mock_tau() {
-    double &mock_tau = Global::config.mock_tau;
-    Base::variable(mock_tau);
-}
-
-void set_mock_voltage() {
-    double &mock_v0 = Global::config.mock_v0;
-    double &mock_v_inf = Global::config.mock_v_inf;
-    std::cin >> mock_v0 >> mock_v_inf;
-    Base::variable(mock_v0);
-    Base::variable(mock_v_inf);
-}
-
-void get_mock_voltage() {
-    double &mock_v0 = Global::config.mock_v0;
-    double &mock_v_inf = Global::config.mock_v_inf;
-    Base::variable(mock_v0);
-    Base::variable(mock_v_inf);
-}
-
-void set_mock_noise() {
-    double &mock_noise = Global::config.mock_noise;
-    std::cin >> mock_noise;
-    Base::variable(mock_noise);
-}
-
-void get_mock_noise() {
-    double &mock_noise = Global::config.mock_noise;
-    Base::variable(mock_noise);
+void get_sampler_value() {
+    std::string key;
+    std::cin >> key;
+    Base::line(key, Global::sampler->get_value(key));
 }
 
 void exec() {
@@ -77,15 +54,11 @@ void exec() {
 
     #define add_func_into_mapper(func, mapper) mapper[#func] = func
     add_func_into_mapper(simple_test, mapper);
+
     add_func_into_mapper(set_sampler, mapper);
     add_func_into_mapper(get_sampler, mapper);
-
-    add_func_into_mapper(set_mock_tau, mapper);
-    add_func_into_mapper(get_mock_tau, mapper);
-    add_func_into_mapper(set_mock_voltage, mapper);
-    add_func_into_mapper(get_mock_voltage, mapper);
-    add_func_into_mapper(set_mock_noise, mapper);
-    add_func_into_mapper(get_mock_noise, mapper);
+    add_func_into_mapper(set_sampler_value, mapper);
+    add_func_into_mapper(get_sampler_value, mapper);
 
     add_func_into_mapper(to_query, mapper);
     add_func_into_mapper(to_measure, mapper);

@@ -3,8 +3,6 @@
 
 namespace Sampler {
 
-    SamplerConfig::SamplerConfig(): mock_v0(2.5), mock_v_inf(5.0), mock_noise(1.0) {}
-
     void SamplerConfig::update(int number_of_waveforms, double emitting_frequency) {
         this->number_of_waveforms = number_of_waveforms;
         this->emitting_frequency = emitting_frequency;

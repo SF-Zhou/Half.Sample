@@ -19,6 +19,11 @@ namespace Constant {
     const double MinTauValue = 0.5;  // V
     const double MaxTauValue = 2e5;  // V
 
+    const double DefaultMockTau = 100;  // us
+    const double DefaultMockV0 = 2.5;  // V
+    const double DefaultMockVInf = 5.0;  // V
+    const double DefaultMockNoise = 1.0;  // V
+
     const double WaveGoingDownThreshold = 0.5;  // V
 }
 

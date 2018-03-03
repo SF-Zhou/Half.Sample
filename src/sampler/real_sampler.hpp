@@ -51,6 +51,14 @@ class RealSampler: public Sampler {
         return true;
     }
 
+    virtual double get_value(const std::string &key) {
+        return 0.0;
+    }
+
+    virtual bool set_value(const std::string &key, const double value) {
+        return true;
+    }
+
     virtual std::string name() {
         return "real_sampler";
     }

@@ -53,8 +53,17 @@ class Sampler:
     def measure(self, number_of_waveforms: int, emitting_frequency: float, auto_mode: bool = False) -> None:
         self.communicate("to_measure {} {:.2f} {}".format(number_of_waveforms, emitting_frequency, auto_mode))
 
-    def set_sampler(self, sampler_name: str):
-        self.communicate("set_sampler {}".format(sampler_name))
+    def set_sampler(self, sampler_name: str) -> Result:
+        return self.communicate("set_sampler {}".format(sampler_name))
+
+    def get_sampler(self) -> Result:
+        return self.communicate("get_sampler")
+
+    def set_sampler_value(self, key: str, value: float) -> Result:
+        return self.communicate("set_sampler_value {} {}".format(key, value))
+
+    def get_sampler_value(self, key: str) -> Result:
+        return self.communicate("get_sampler_value {}".format(key))
 
     def query(self) -> Result:
         result = self.communicate("to_query")

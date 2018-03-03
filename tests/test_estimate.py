@@ -8,7 +8,7 @@ class MyTestCase(unittest.TestCase):
         sampler.set_sampler(sampler_name="mock_sampler")
 
         for mock_tau in [50, 100, 200]:  # us
-            sampler.communicate("set_mock_tau {}".format(mock_tau))
+            sampler.set_sampler_value("mock_tau", mock_tau)
 
             sampler.measure(number_of_waveforms=2, emitting_frequency=200)
 
@@ -26,21 +26,21 @@ class MyTestCase(unittest.TestCase):
 
         mock_taus = [1, 10, 100, 1000, 10000]  # us
         for mock_tau in mock_taus:
-            sampler.communicate('set_mock_tau {}'.format(mock_tau))
+            sampler.set_sampler_value("mock_tau", mock_tau)
             sampler.measure(number_of_waveforms=4, emitting_frequency=10, auto_mode=True)
             while sampler.is_measuring:
                 time.sleep(0.1)
             result = sampler.query()
             diff_ratio = abs(result.tau - mock_tau) / mock_tau
 
-            self.assertTrue(diff_ratio <= 0.1)
+            self.assertTrue(diff_ratio <= 0.1 or diff < 0.5)
 
     def test_low_frequency(self):
         sampler.set_sampler(sampler_name="mock_sampler")
 
         mock_taus = [20000, 40000, 80000, 100000]  # us
         for mock_tau in mock_taus:
-            sampler.communicate('set_mock_tau {}'.format(mock_tau))
+            sampler.set_sampler_value("mock_tau", mock_tau)
 
             sampler.measure(number_of_waveforms=4, emitting_frequency=10, auto_mode=True)
             while sampler.is_measuring:
@@ -59,11 +59,12 @@ class MyTestCase(unittest.TestCase):
         sampler.set_sampler(sampler_name="mock_sampler")
 
         for mock_v0, mock_v_inf in [[1, 2], [2, 3]]:
-            sampler.communicate('set_mock_voltage {} {}'.format(mock_v0, mock_v_inf))
+            sampler.set_sampler_value("mock_v0", mock_v0)
+            sampler.set_sampler_value("mock_v_inf", mock_v_inf)
 
             mock_taus = [1, 10, 100, 1000, 10000]  # us
             for mock_tau in mock_taus:
-                sampler.communicate('set_mock_tau {}'.format(mock_tau))
+                sampler.set_sampler_value("mock_tau", mock_tau)
 
                 sampler.measure(number_of_waveforms=4, emitting_frequency=10, auto_mode=True)
                 while sampler.is_measuring:
@@ -75,9 +76,6 @@ class MyTestCase(unittest.TestCase):
                 self.assertTrue(diff_ratio <= 0.2 or diff < 0.5)
                 self.assertTrue(abs(mock_v0 - result.v0) <= 0.5)
                 self.assertTrue(abs(mock_v_inf - result.v_inf) <= 0.5)
-
-        mock_v0, mock_v_inf = 2.5, 5.0
-        sampler.communicate('set_mock_voltage {} {}'.format(mock_v0, mock_v_inf))
 
 
 if __name__ == '__main__':

@@ -13,6 +13,9 @@ class Sampler {
     public:
     virtual bool sample(const SamplerConfig &config, Result::SamplingResult &result) = 0;
     virtual std::string name() = 0;
+
+    virtual double get_value(const std::string &key) = 0;
+    virtual bool set_value(const std::string &key, const double value) = 0;
 };
 
 typedef std::shared_ptr<Sampler> SamplerPtr;
