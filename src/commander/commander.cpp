@@ -61,6 +61,17 @@ void get_mock_voltage() {
     Base::variable(mock_v_inf);
 }
 
+void set_mock_noise() {
+    double &mock_noise = Global::config.mock_noise;
+    std::cin >> mock_noise;
+    Base::variable(mock_noise);
+}
+
+void get_mock_noise() {
+    double &mock_noise = Global::config.mock_noise;
+    Base::variable(mock_noise);
+}
+
 void exec() {
     std::unordered_map<std::string, std::function<void (void)> > mapper;
 
@@ -73,6 +84,8 @@ void exec() {
     add_func_into_mapper(get_mock_tau, mapper);
     add_func_into_mapper(set_mock_voltage, mapper);
     add_func_into_mapper(get_mock_voltage, mapper);
+    add_func_into_mapper(set_mock_noise, mapper);
+    add_func_into_mapper(get_mock_noise, mapper);
 
     add_func_into_mapper(to_query, mapper);
     add_func_into_mapper(to_measure, mapper);

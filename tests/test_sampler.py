@@ -37,6 +37,14 @@ class MyTestCase(unittest.TestCase):
         mock_v0, mock_v_inf = 2.5, 5.0
         result = sampler.communicate("set_mock_voltage {} {}".format(mock_v0, mock_v_inf))
 
+    def test_mock_noise_set_get(self):
+        mock_noise = 1.0  # V
+        result = sampler.communicate("set_mock_noise {}".format(mock_noise))
+        self.assertEqual(result.mock_noise, mock_noise)
+
+        result = sampler.communicate("get_mock_noise")
+        self.assertEqual(result.mock_noise, mock_noise)
+
 
 if __name__ == '__main__':
     unittest.main()
