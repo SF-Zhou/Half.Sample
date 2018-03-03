@@ -21,6 +21,9 @@ class Result:
         self.b = 0.0
         self.loss = 0.0
 
+        self.v0 = 0.0
+        self.v_inf = 0.0
+
         self.mock_tau = 0.0
         self.mock_v0 = 0.0
         self.mock_v_inf = 0.0
@@ -31,3 +34,5 @@ class Result:
         if self.success:
             tau, w, b = self.tau, self.w, self.b
             self.estimate = [w * math.exp(t / -tau) + b for t in self.time_line]
+
+            self.v0, self.v_inf = b + w, b

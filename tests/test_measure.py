@@ -11,6 +11,9 @@ class MyTestCase(unittest.TestCase):
     def test_simple_measure(self):
         sampler.set_sampler(sampler_name="mock_sampler")
 
+        mock_v0, mock_v_inf = 2.5, 5.0
+        sampler.communicate('set_mock_voltage {} {}'.format(mock_v0, mock_v_inf))
+
         mock_tau = 100  # us
         sampler.communicate("set_mock_tau {}".format(mock_tau))
 
