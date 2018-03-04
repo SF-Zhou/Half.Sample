@@ -118,8 +118,6 @@ bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &resu
 
             double f1_score = a * b / (a + b);
             results[-f1_score] = estimated_result;
-
-            frequency *= 2;
         }
 
         if (results.size() == 0) {
