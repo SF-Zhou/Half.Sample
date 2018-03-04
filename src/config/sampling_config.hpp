@@ -1,9 +1,9 @@
-#ifndef SAMPLER_CONFIG_HPP
-#define SAMPLER_CONFIG_HPP
+#ifndef sampling_config_HPP
+#define sampling_config_HPP
 
-namespace Sampler {
+namespace Config {
 
-struct SamplerConfig {
+struct SamplingConfig {
     double sampling_frequency;  // Hz
     double emitting_frequency;  // Hz
     double sampling_interval;  // us

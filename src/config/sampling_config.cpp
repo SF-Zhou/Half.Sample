@@ -1,9 +1,9 @@
-#include "sampler_config.hpp"
+#include "sampling_config.hpp"
 #include "../constant.hpp"
 
-namespace Sampler {
+namespace Config {
 
-    void SamplerConfig::update(int number_of_waveforms, double emitting_frequency) {
+    void SamplingConfig::update(int number_of_waveforms, double emitting_frequency) {
         this->number_of_waveforms = number_of_waveforms;
         this->emitting_frequency = emitting_frequency;
 

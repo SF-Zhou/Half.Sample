@@ -9,7 +9,7 @@
 namespace Commander {
 namespace Processer {
 
-bool align(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+bool align(const Config::SamplingConfig &config, Result::SamplingResult &result) {
     result.maximum = *std::max_element(result.buffer, result.buffer + config.sampling_length);
     result.minimum = *std::min_element(result.buffer, result.buffer + config.sampling_length);
 
@@ -21,7 +21,7 @@ bool align(const Sampler::SamplerConfig &config, Result::SamplingResult &result)
     return true;
 }
 
-bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+bool summation(const Config::SamplingConfig &config, Result::SamplingResult &result) {
     const double minimum = result.minimum;
     const double maximum = result.maximum;
 
@@ -68,7 +68,7 @@ bool summation(const Sampler::SamplerConfig &config, Result::SamplingResult &res
     return true;
 }
 
-Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &result, const double frequency) {
+Waveform average(const Config::SamplingConfig &config, Result::SamplingResult &result, const double frequency) {
     int length = int(config.sampling_frequency / frequency / 2);
     length = std::min(length, config.valid_length);
 
@@ -91,7 +91,7 @@ Waveform average(const Sampler::SamplerConfig &config, Result::SamplingResult &r
     return Waveform(merged_wave, interval);
 }
 
-bool estimate(const Sampler::SamplerConfig &config, Result::SamplingResult &result) {
+bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &result) {
     if (Global::auto_mode) {
         std::map<double, Estimate::EstimatedResult> results;
 

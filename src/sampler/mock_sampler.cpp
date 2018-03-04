@@ -13,7 +13,7 @@ MockSampler::MockSampler()  {
     mock_noise = Constant::DefaultMockNoise;
 }
 
-bool MockSampler::sample(const SamplerConfig &config, Result::SamplingResult &result) {
+bool MockSampler::sample(const Config::SamplingConfig &config, Result::SamplingResult &result) {
     auto buffer = result.buffer;
 
     for (int i = 0; i < config.number_of_waveforms + 1; i++) {

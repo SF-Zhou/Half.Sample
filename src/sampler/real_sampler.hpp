@@ -15,7 +15,7 @@ namespace Sampler {
 
 class RealSampler: public Sampler {
     public:
-    virtual bool sample(const SamplerConfig &config, Result::SamplingResult &result) {
+    virtual bool sample(const Config::SamplingConfig &config, Result::SamplingResult &result) {
         ErrorCode code = Success;
         BufferedAiCtrl *bfdAiCtrl = AdxBufferedAiCtrlCreate();
 

@@ -1,8 +1,8 @@
 #include "global.hpp"
 
-Result::SamplingResult Global::result;
-Sampler::SamplerConfig Global::config;
 Sampler::SamplerPtr Global::sampler;
+Config::SamplingConfig Global::config;
+Result::SamplingResult Global::result;
 
 bool Global::measuring = false;
 bool Global::success = true;

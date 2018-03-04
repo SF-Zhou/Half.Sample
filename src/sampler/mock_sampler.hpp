@@ -8,7 +8,7 @@ namespace Sampler {
 class MockSampler: public Sampler {
     public:
     MockSampler();
-    virtual bool sample(const SamplerConfig &config, Result::SamplingResult &result);
+    virtual bool sample(const Config::SamplingConfig &config, Result::SamplingResult &result);
     virtual std::string name();
 
     virtual double get_value(const std::string &key);
