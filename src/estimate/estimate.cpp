@@ -73,11 +73,12 @@ namespace Estimate {
     bool is_wave_going_down(Waveform wave) {
         const auto &y = *wave.values;
         int m = y.size();
+        int n = m / 3;
 
         double sum_x = 0, sum_y = 0;
         double sum_xx = 0, sum_xy = 0;
 
-        for (int i = m / 3 * 2; i < m ; i++) {
+        for (int i = m - n; i < m ; i++) {
             double vx = i;
             double vy = y[i];
 
@@ -87,11 +88,11 @@ namespace Estimate {
             sum_xy += vx * vy;
         }
 
-        double mean_x = sum_x / m;
-        double mean_y = sum_y / m;
+        double mean_x = sum_x / n;
+        double mean_y = sum_y / n;
 
-        double w = (sum_xy / m - mean_x * mean_y) / (sum_xx / m - mean_x * mean_x);
-        return w * (m / 3) <= Constant::WaveGoingDownThreshold;
+        double w = (sum_xy / n - mean_x * mean_y) / (sum_xx / n - mean_x * mean_x);
+        return w * n <= Constant::WaveGoingDownThreshold;
     }
 
 } // namespace Estimate

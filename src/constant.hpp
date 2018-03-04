@@ -28,7 +28,7 @@ namespace Constant {
     const double DefaultMockVInf = 5.0;  // V
     const double DefaultMockNoise = 1.0;  // V
 
-    const double WaveGoingDownThreshold = 0.5;  // V
+    const double WaveGoingDownThreshold = -0.2;  // V
 }
 
 #endif
