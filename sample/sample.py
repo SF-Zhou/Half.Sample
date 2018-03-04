@@ -42,7 +42,7 @@ class Sampler:
         exec(lines, result.__dict__)
 
         if result.error:
-            raise self.Error(result.message)
+            raise self.Error("{}: {}".format(result.message, result.chinese_message))
 
         return result
 

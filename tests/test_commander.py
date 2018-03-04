@@ -10,7 +10,7 @@ class MyTestCase(unittest.TestCase):
         try:
             result = sampler.communicate("unknown_command")
         except sampler.Error as e:
-            self.assertEqual(str(e), "command_not_found")
+            self.assertTrue(str(e).startswith("command_not_found"))
 
 
 if __name__ == '__main__':

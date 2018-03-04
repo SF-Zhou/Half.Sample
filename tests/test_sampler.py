@@ -13,7 +13,7 @@ class MyTestCase(unittest.TestCase):
         try:
             result = sampler.communicate("set_sampler unknown_sampler")
         except sampler.Error as e:
-            self.assertEqual(str(e), "sampler_not_found")
+            self.assertTrue(str(e).startswith("sampler_not_found"))
 
     def test_mock_tau_set_get(self):
         mock_tau = 100  # us
