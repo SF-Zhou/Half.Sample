@@ -7,7 +7,7 @@ namespace Config {
         this->number_of_waveforms = number_of_waveforms;
         this->emitting_frequency = emitting_frequency;
 
-        if (emitting_frequency >= 10) {
+        if (emitting_frequency >= Constant::HighSpeedSamplingThreshold) {
             this->sampling_frequency = Constant::MaxSamplingFrequency;
         } else {
             this->sampling_frequency = Constant::MinSamplingFrequency;

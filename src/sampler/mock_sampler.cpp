@@ -19,15 +19,16 @@ bool MockSampler::sample(const Config::SamplingConfig &config, Result::SamplingR
     for (int i = 0; i < config.number_of_waveforms + 1; i++) {
         auto current = buffer + config.waveform_length * i;
 
+        const int transition_length = 5;
         for (int j = 0; j < config.waveform_length; j++) {
-            if (j < 5) {
-                current[j] = j * mock_v0 / 5;
+            if (j < transition_length) {
+                current[j] = j * mock_v0 / transition_length;
             } else if (j < config.waveform_length / 2) {
                 double b = mock_v_inf;
                 double w = mock_v0 - b;
-                current[j] = b + w * exp((5 - j) * config.sampling_interval / mock_tau);
-            } else if (j < config.waveform_length / 2 + 5) {
-                current[j] = (5 - j + config.waveform_length / 2) * mock_v_inf / 5;
+                current[j] = b + w * exp((j - transition_length) * config.sampling_interval / -mock_tau);
+            } else if (j < config.waveform_length / 2 + transition_length) {
+                current[j] = (transition_length - (j - config.waveform_length / 2)) * mock_v_inf / transition_length;
             } else {
                 current[j] = 0;
             }

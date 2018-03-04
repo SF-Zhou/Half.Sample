@@ -95,9 +95,9 @@ bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &resu
     if (Global::auto_mode) {
         std::map<double, Estimate::EstimatedResult> results;
 
-        double frequency_upper_bound = 20480;
-        if (config.emitting_frequency < 10) {
-            frequency_upper_bound = 8;
+        double frequency_upper_bound = Constant::HighSpeedEstimatedFrequencyUpperBound;
+        if (config.emitting_frequency < Constant::HighSpeedSamplingThreshold) {
+            frequency_upper_bound = Constant::LowSpeedEstimatedFrequencyUpperBound;
         }
 
         for (double frequency = config.emitting_frequency; frequency <= frequency_upper_bound; frequency *= 2) {
