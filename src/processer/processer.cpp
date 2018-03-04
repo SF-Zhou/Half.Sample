@@ -14,7 +14,7 @@ bool align(const Config::SamplingConfig &config, Result::SamplingResult &result)
     result.minimum = *std::min_element(result.buffer, result.buffer + config.sampling_length);
 
     if (result.maximum - result.minimum < Constant::MinVoltageAmplitude) {
-        Global::message = "voltage_not_enough";
+        result.error_code = Error::VOLTAGE_NOT_ENOUGH;
         return false;
     }
 
@@ -61,6 +61,11 @@ bool summation(const Config::SamplingConfig &config, Result::SamplingResult &res
         }
     }
 
+    if (copy_times == 0) {
+        result.error_code = Error::WAVE_NOT_FOUND;
+        return false;
+    }
+
     const double base_value = base_count ? base_sum / base_count : 0;
     for (int j = 0; j < config.valid_length; j ++) {
         result.wave[j] = result.wave[j] / copy_times - base_value;
@@ -92,7 +97,7 @@ Waveform average(const Config::SamplingConfig &config, Result::SamplingResult &r
 }
 
 bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &result) {
-    if (Global::auto_mode) {
+    if (config.auto_mode) {
         std::map<double, Estimate::EstimatedResult> results;
 
         double frequency_upper_bound = Constant::HighSpeedEstimatedFrequencyUpperBound;
@@ -121,6 +126,7 @@ bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &resu
         }
 
         if (results.size() == 0) {
+            result.error_code = Error::APPROPRIATE_WAVE_NOT_FOUND;
             return false;
         }
 

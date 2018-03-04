@@ -5,11 +5,12 @@
 
 #include "Windows.h"
 #include "bdaqctrl.h"
+#include "../error/error.hpp"
 using namespace std;
 using namespace Automation::BDaq;
 
 #define deviceDescription L"PCI-1714,BID#0"
-#define check_code(code) if (BioFailed(code)) { /* error_code = code; */ return false; }
+#define check_code(code) if (BioFailed(code)) { result.error_code = Error::REAL_SAMPLER_ERROR; return false; }
 
 namespace Sampler {
 

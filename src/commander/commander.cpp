@@ -21,7 +21,7 @@ void set_sampler() {
     if (Global::sampler.get()) {
         Base::variable(sampler_name);
     } else {
-        Base::error("sampler_not_found");
+        Base::error(Error::SAMPLER_NOT_FOUND);
     }
 }
 
@@ -69,7 +69,7 @@ void exec() {
         if (mapper.count(command)) {
             mapper[command]();
         } else {
-            Base::command_not_found();
+            Base::error(Error::COMMAND_NOT_FOUND);
         }
         Base::end();
     }

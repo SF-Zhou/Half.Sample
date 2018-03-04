@@ -13,6 +13,8 @@ struct SamplingConfig {
     int valid_length;
     int number_of_waveforms;
 
+    bool auto_mode;
+
     void update(int number_of_waveforms, double emitting_frequency);
 };
 

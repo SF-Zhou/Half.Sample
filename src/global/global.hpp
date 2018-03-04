@@ -10,11 +10,6 @@ class Global {
     static Sampler::SamplerPtr sampler;
     static Config::SamplingConfig config;
     static Result::SamplingResult result;
-
-    static bool measuring;
-    static bool success;
-    static bool auto_mode;
-    static std::string message;
 };
 
 #endif

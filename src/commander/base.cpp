@@ -48,13 +48,16 @@ namespace Base {
     }
 
     // ### 1.3 Error & End Mark
-    void error(std::string message) {
+    void error(Error::Code error_code) {
         line("error", true);
+
+        std::string message = Error::to_string(error_code);
         variable(message);
     }
 
-    void command_not_found() {
-        error("command_not_found");
+    void error(std::string message) {
+        line("error", true);
+        variable(message);
     }
 
     void end() {

@@ -12,7 +12,7 @@
 
 namespace Commander {
     void measure() {
-        bool &success = Global::success;
+        bool &success = Global::result.success;
         success = true;
 
         do {
@@ -29,7 +29,7 @@ namespace Commander {
             if (!success) break;
         } while (false);
 
-        Global::measuring = false;
+        Global::result.measuring = false;
     }
 
 #ifdef _WIN32
@@ -40,7 +40,7 @@ namespace Commander {
 #endif
 
     void to_query() {
-        bool success = Global::success;
+        bool success = Global::result.success;
         Base::variable(success);
 
         if (success) {
@@ -70,7 +70,7 @@ namespace Commander {
             }
             printf("]\n");
         } else {
-            std::string &message = Global::message;
+            std::string message = Error::to_string(Global::result.error_code);
             Base::variable(message);
         }
     }
@@ -83,12 +83,12 @@ namespace Commander {
         std::cin >> emitting_frequency;
         std::cin >> mode;
 
-        Global::auto_mode = (mode == "True");
+        Global::config.auto_mode = (mode == "True");
         Global::config.update(number_of_waveforms, emitting_frequency);
 
-        bool &measuring = Global::measuring;
+        bool &measuring = Global::result.measuring;
         if (measuring) {
-            Base::error("now_in_measuring");
+            Base::error(Error::NOW_IN_MEASURING);
             return;
         }
 
@@ -105,7 +105,7 @@ namespace Commander {
     }
 
     void is_measuring() {
-        bool &measuring = Global::measuring;
+        bool &measuring = Global::result.measuring;
         Base::variable(measuring);
     }
 

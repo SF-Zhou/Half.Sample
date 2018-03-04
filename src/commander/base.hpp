@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "../error/error.hpp"
 
 namespace Commander {
 namespace Base {
@@ -13,8 +14,7 @@ namespace Base {
     void line(std::string name, double value);
     #define variable(var) line(#var, var);
 
-    void error(std::string message);
-    void command_not_found();
+    void error(Error::Code error_code);
     void end();
 
 } // namespace Base
