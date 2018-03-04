@@ -11,6 +11,7 @@ MockSampler::MockSampler()  {
     mock_v0 = Constant::DefaultMockV0;
     mock_v_inf = Constant::DefaultMockVInf;
     mock_noise = Constant::DefaultMockNoise;
+    mock_is_going_down = 0.0;
 }
 
 bool MockSampler::sample(const Config::SamplingConfig &config, Result::SamplingResult &result) {
@@ -27,6 +28,10 @@ bool MockSampler::sample(const Config::SamplingConfig &config, Result::SamplingR
                 double b = mock_v_inf;
                 double w = mock_v0 - b;
                 current[j] = b + w * exp((j - transition_length) * config.sampling_interval / -mock_tau);
+
+                if (mock_is_going_down) {
+                    current[j] += w / 3 * exp((config.waveform_length / 2 - j) * config.sampling_interval / -mock_tau);
+                }
             } else if (j < config.waveform_length / 2 + transition_length) {
                 current[j] = (transition_length - (j - config.waveform_length / 2)) * mock_v_inf / transition_length;
             } else {
@@ -61,6 +66,8 @@ double MockSampler::get_value(const std::string &key) {
         value = mock_v_inf;
     } else if (key == "mock_noise") {
         value = mock_noise;
+    } else if (key == "mock_is_going_down") {
+        value = mock_is_going_down;
     } else {
         return 0.0;
     }
@@ -77,6 +84,8 @@ bool MockSampler::set_value(const std::string &key, const double value) {
         mock_v_inf = value;
     } else if (key == "mock_noise") {
         mock_noise = value;
+    } else if (key == "mock_is_going_down") {
+        mock_is_going_down = value;
     } else {
         return false;
     }
