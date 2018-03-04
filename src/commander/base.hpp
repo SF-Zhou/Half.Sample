@@ -5,51 +5,19 @@
 #include <string>
 
 namespace Commander {
+namespace Base {
 
-class Base {
-    public:
-
-    // ### 1.1 Output
-    // output various values to stdout
-    static void output(bool value) {
-        printf (value ? "True" : "False");
-    }
-
-    static void output(std::string value) {
-        std::cout << "\"" << value << "\"";
-    }
-
-    template<typename T>
-    static void output(T value) {
-        std::cout << value;
-    }
-
-    // ### 1.2 Line
-    // print a full line like "index = 100"
-    template<typename T>
-    static void line(std::string name, T value) {
-        std::cout << name << " = ";
-        output(value);
-        std::cout << std::endl;
-    }
-
+    void line(std::string name, bool value);
+    void line(std::string name, std::string value);
+    void line(std::string name, int value);
+    void line(std::string name, double value);
     #define variable(var) line(#var, var);
 
-    // ### 1.3 Error & End Mark
-    static void error(std::string message) {
-        line("error", true);
-        variable(message);
-    }
+    void error(std::string message);
+    void command_not_found();
+    void end();
 
-    static void command_not_found() {
-        error("command_not_found");
-    }
-
-    static void end() {
-        std::cout << "EOF" << std::endl;
-    }
-};
-
+} // namespace Base
 } // namespace Commander
 
 #endif
