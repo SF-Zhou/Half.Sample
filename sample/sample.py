@@ -32,7 +32,7 @@ class Sampler:
         setattr(self, 'p_', p)
         return p
 
-    def communicate(self, command: str, executor: st.Process=None) -> Result:
+    def communicate(self, command: str, executor: st.Process = None) -> Result:
         executor = executor or self.p
 
         executor.write_line(command)
