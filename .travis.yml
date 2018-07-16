@@ -16,16 +16,5 @@ script:
     - pycodestyle . --max-line-length=120
     - python -m pytest
 
-before_deploy: scons
-deploy:
-  provider: pypi
-  user: Jefung
-  skip_cleanup: true
-  on:
-    tags: true
-  password:
-    secure: h901rrt9ckgxjwyiohGcw9ozef+XAuyMI9VxwslVSyGs9E7bjC4q531cV+jB+9ZQJfhQmRJItN/IHcgBk/wSeFwbO8VLgw2d+N61HCa8ZCc77rJ2vElUzWvguHlTzq6buECyIVr+V93pFopI7/yM+40xYNgWNx3MlsYPyBRm/DKB+QiEQSurPX+8nODLM/3QGne25FOpZuQ/VazCNIaY+Hj5xZ6Mo+DD9YKiFZbeF8zQKGdTtuZ9mGuXgazgndXJ9fjLOJOF0jUJMylxuvWgf0pe+adZtA2yIRHMMBbSgzCrxOcRRnCau0Y4hC9pM1Xq6hW/hLmwWVS/USUO3QCt19yM8GwxxoRu1zkUH+TGPQv/ry5KU7I3UMmzIP6Q/a2rv6bOhMSViSETW9VXwo5+jHwk0M4RrXL5eAE1qnIn5RaIj0H+zMfpxhBjCF12RLBXUklELp1wHJZrGGkrS+pjopOXBMtsZQ/8o47niRlRN36Yxvll9TViFVt8GMyM9G7aRrfc5rrd4FYPZtWLkX8+2B2cX5xuB1zz5sq+EywukBxB964Ql1VOv0qg1d8hi2+aIj4Dw9c83mT/X/ZL1LeWZ3AmHdL7m9UB0giL1doUO0IxS3kQDL0I1HYp5hJ2zI49yU4AhcCGUrL+FXLdJZ2Zhd1AkICsUnCxMxuobhUXeaQ=
-
-
 notifications:
     email: false
