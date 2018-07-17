@@ -16,7 +16,7 @@ class Sampler:
 
         execution_name = 'sample.exe'
         if not os.path.exists(execution_name):
-            execution_name = os.path.join(main_path, 'build', execution_name)
+            execution_name = os.path.join(main_path, 'cpp_build', execution_name)
         if not os.path.exists(execution_name):
             raise self.Error('Sample Driver Not Found')
 

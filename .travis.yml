@@ -21,11 +21,11 @@ deploy:
   provider: pypi
   user: Jefung
   skip_cleanup: true
-  on:
-    tags: true
   password:
-    secure: h901rrt9ckgxjwyiohGcw9ozef+XAuyMI9VxwslVSyGs9E7bjC4q531cV+jB+9ZQJfhQmRJItN/IHcgBk/wSeFwbO8VLgw2d+N61HCa8ZCc77rJ2vElUzWvguHlTzq6buECyIVr+V93pFopI7/yM+40xYNgWNx3MlsYPyBRm/DKB+QiEQSurPX+8nODLM/3QGne25FOpZuQ/VazCNIaY+Hj5xZ6Mo+DD9YKiFZbeF8zQKGdTtuZ9mGuXgazgndXJ9fjLOJOF0jUJMylxuvWgf0pe+adZtA2yIRHMMBbSgzCrxOcRRnCau0Y4hC9pM1Xq6hW/hLmwWVS/USUO3QCt19yM8GwxxoRu1zkUH+TGPQv/ry5KU7I3UMmzIP6Q/a2rv6bOhMSViSETW9VXwo5+jHwk0M4RrXL5eAE1qnIn5RaIj0H+zMfpxhBjCF12RLBXUklELp1wHJZrGGkrS+pjopOXBMtsZQ/8o47niRlRN36Yxvll9TViFVt8GMyM9G7aRrfc5rrd4FYPZtWLkX8+2B2cX5xuB1zz5sq+EywukBxB964Ql1VOv0qg1d8hi2+aIj4Dw9c83mT/X/ZL1LeWZ3AmHdL7m9UB0giL1doUO0IxS3kQDL0I1HYp5hJ2zI49yU4AhcCGUrL+FXLdJZ2Zhd1AkICsUnCxMxuobhUXeaQ=
-
+    secure: JeGzQOB9XzGdb7A8gTyc9TcH6IZAMHCp4YiKj07qci9Z1vgK/FlxRufLN19D5eUEtGW/GtGh9YLv/nmKTZmbuZt8h0y+ft6fXfN31Tm8F4SatkSA/RyAC4e8vvpS+/bd/uboP/aiooKRyL3vkMmrLu4gagx4AI+eqlCsGbK0Z1lxIPRT7jVGT290Sx2RR2zZP9LzyB+vfh6SJKp3nTypWZsmiQcxR1cvxtkpSOYM0LN6EAkBA6IgQjuGofoY/JGTwWam7u8XRemXjhv0lEW25Ix34Z2hWKWgQRRq9Gxy8wNHma0FV5TzcRUbHDSjtbb6Jw/cD+xEpd34XQFM+lQY0v2kMD2tGEpa20RctQRh44aptCF2ihAkVenWXeA9a0a/BJGbvP+VGl6tN6pjw6a6tl6oT7sbAI6rh9k9gtz8PHqf50Y1AeYIFX+ULqIQRp2MybSF+JosoNYxmRuo40Gdm+Hpu5QMuLjVO+oJwbWMj4jBJawlaOHnec7D298IYrgBpVCcgA3etcgQhctjLSww1n/WOjICITVNuzLU2f+D0XdOz7sCRi0y2kIMb7iEIfeLUGflonrSs1bMY3ViI9PO9Qz7v6ZznvBZ0KhA48CZlCIzu/sW5biWM62mb2iHm3AdBMrJzyce2df+tPi3cK7cYNQ47GLruqmrerVaBiaUIa4=
+   on:
+      branch: Jefung/feature/upload_sample-kd_to_pypi
+      tag: true
 
 notifications:
     email: false
