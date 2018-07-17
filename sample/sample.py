@@ -1,6 +1,6 @@
 import st
 import os
-import subprocess
+import shutil
 from . import Result
 
 
@@ -14,13 +14,19 @@ class Sampler:
             if os.system('cd {} && scons'.format(main_path)) != 0:
                 raise self.Error("Compile C++ Driver Error")
 
+        # try to use cpp_build/sample.exe when developing
         execution_name = 'sample.exe'
         if not os.path.exists(execution_name):
             execution_name = os.path.join(main_path, 'cpp_build', execution_name)
-        if not os.path.exists(execution_name):
-            raise self.Error('Sample Driver Not Found')
+        if os.path.exists(execution_name):
+            return os.path.abspath(execution_name)
 
-        return os.path.abspath(execution_name)
+        # try to find sample.exe in system path when release
+        if shutil.which(execution_name):
+            return shutil.which(execution_name)
+
+        raise self.Error('Sample Driver Not Found')
+
 
     @property
     def p(self) -> st.Process:
