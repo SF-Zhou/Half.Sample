@@ -23,8 +23,8 @@ class Sampler:
             return os.path.abspath(execution_name)
 
         # try to find sample.exe in system path when release
-        if shutil.which(execution_name):
-            return shutil.which(execution_name)
+        if shutil.which("sample.exe"):
+            return shutil.which("sample.exe")
 
         raise self.Error('Sample Driver Not Found')
 
