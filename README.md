@@ -19,6 +19,10 @@ Others:
 
 You can also refer to the Travis-CI config file: `.travis.yml`, or Appveyor config file: `appveyor.yml`.
 
+## pip安装 `pip install sample-kd`
+
+ps: 由于`sample` 在 `pypi` 已经被人注册,所以只能加后缀. 安装后可以python安装目录下找到`sample.exe`
+
 ## 上传到pypi
 
 1. 修改setup.py 里面的版本号
