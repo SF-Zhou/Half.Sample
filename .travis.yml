@@ -16,5 +16,15 @@ script:
     - pycodestyle . --max-line-length=120
     - python -m pytest
 
+before_deploy: scons
+deploy:
+  provider: pypi
+  user: Jefung
+  password:
+    secure: "JeGzQOB9XzGdb7A8gTyc9TcH6IZAMHCp4YiKj07qci9Z1vgK/FlxRufLN19D5eUEtGW/GtGh9YLv/nmKTZmbuZt8h0y+ft6fXfN31Tm8F4SatkSA/RyAC4e8vvpS+/bd/uboP/aiooKRyL3vkMmrLu4gagx4AI+eqlCsGbK0Z1lxIPRT7jVGT290Sx2RR2zZP9LzyB+vfh6SJKp3nTypWZsmiQcxR1cvxtkpSOYM0LN6EAkBA6IgQjuGofoY/JGTwWam7u8XRemXjhv0lEW25Ix34Z2hWKWgQRRq9Gxy8wNHma0FV5TzcRUbHDSjtbb6Jw/cD+xEpd34XQFM+lQY0v2kMD2tGEpa20RctQRh44aptCF2ihAkVenWXeA9a0a/BJGbvP+VGl6tN6pjw6a6tl6oT7sbAI6rh9k9gtz8PHqf50Y1AeYIFX+ULqIQRp2MybSF+JosoNYxmRuo40Gdm+Hpu5QMuLjVO+oJwbWMj4jBJawlaOHnec7D298IYrgBpVCcgA3etcgQhctjLSww1n/WOjICITVNuzLU2f+D0XdOz7sCRi0y2kIMb7iEIfeLUGflonrSs1bMY3ViI9PO9Qz7v6ZznvBZ0KhA48CZlCIzu/sW5biWM62mb2iHm3AdBMrJzyce2df+tPi3cK7cYNQ47GLruqmrerVaBiaUIa4="
+  skip_cleanup: true
+  on:
+    all_branches: true
+
 notifications:
     email: false

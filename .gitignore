@@ -40,3 +40,7 @@ __pycache__/
 .idea/
 .ipynb_checkpoints/
 .pytest_cache/
+
+# setup cache
+dist
+sample_kd.egg-info
