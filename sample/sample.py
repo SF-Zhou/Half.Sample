@@ -1,6 +1,7 @@
-import st
 import os
 import shutil
+
+import st
 from . import Result
 
 
@@ -26,7 +27,6 @@ class Sampler:
             return shutil.which(execution_name)
 
         raise self.Error('Sample Driver Not Found')
-
 
     @property
     def p(self) -> st.Process:
