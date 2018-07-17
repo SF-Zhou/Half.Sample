@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="sample-kd",
-    version="0.1.3",
+    version="0.1.4",
     author="Jefung",
     author_email="jefung865424525@gmail.com",
     description="sample data and analysis",
