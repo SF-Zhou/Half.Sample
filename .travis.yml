@@ -1,20 +1,26 @@
 language: python
-
 python:
-    - "3.4"
-
-install: 
-    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-    - sudo apt-get update
-    - sudo apt-get install g++-4.9
-    - sudo apt-get install scons
-    - pip install -r requirements.txt
-    - pip install -r requirements-dev.txt
-
+- '3.4'
+install:
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update
+- sudo apt-get install g++-4.9
+- sudo apt-get install scons
+- pip install -r requirements.txt
+- pip install -r requirements-dev.txt
 script:
-    - scons
-    - pycodestyle . --max-line-length=120
-    - python -m pytest
-
+- scons
+- pycodestyle . --max-line-length=120
+- python -m pytest
+before_deploy: scons
+deploy:
+  provider: pypi
+  user: Jefung
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
+  password:
+    secure: L7eYd4LGVj/bAw6UpDrf6PYTi/mW/+IggL6DVWB6/ptYwN1B5xZ0SVoKKOmmWH/Y5uWw9cEy133O2Mpx92ZtSLckGj6ibySVkTrQVRGft/lmYDC2ORanxDoPG3gl+BcA/8DjYwonu1mh3klNYW7/Jwi9uFgmXXr88EOPuVo3JfVXazZH92lGe6a7g0P6TfdZtsBxHDdkyNu+U2yNPFoeguSvsmdMD0zRQdoTI82M95tnF2pGUs6XOZ7+Ezl+h/kjfF+UudNaW8wWKMPeCVKHlldPpCmHRx+mdS0QDxsZ+gvdXGfkuHgDJz4oEOQ/phX+84zn9jaTUfThN81fvX2CjUejR9gp3ejWCPqTDAycpm0ENgw20PhbK13NrytQEDGbp+cBR3w60FVzrqsAWtxdIzyPwaAfNXrH8w+Lo0y5DCLEYvvT8w8DJ88L8aBOrd0enbaG8gnoIWwcPNWCEO+Vb3H5FI/GSg1RoWnqJHEtQskdcKX61bdvXT9lUOz5BNbEXfb7au/+CZNNn61NpkDP3MySuRo4I0bMhlBp90ba77wmGAXCgRw1sk0XmverhKi+WztFOeWJm66XeDuZPmh9p4ZFxJ4pD6wzH2nzc4wcqPgyQc2nTnhPLDn+47S+h1gLsL8d4wqr7FOhw8ZoKMt/msocL8IkfUqsvp2+Sp8sKZA=
 notifications:
-    email: false
+  email: false
