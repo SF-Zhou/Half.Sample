@@ -4,7 +4,7 @@
 
 namespace Estimate {
 
-    EstimatedResult::EstimatedResult(Waveform wave, double tau): tau(tau), y(wave.values), interval(wave.interval) {
+    EstimatedResult::EstimatedResult(Waveform wave, double tau): tau(tau), y(wave.values), interval(wave.interval),estimate_frequency(wave.frequency) {
         calculate_para();
         calculate_loss();
     };

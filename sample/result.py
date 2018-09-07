@@ -22,10 +22,11 @@ class Result:
         self.success = False
 
         self.sampling_interval = 0.0  # us
-        self.wave_interval = 0.0   # us
+        self.wave_interval = 0.0  # us
         self.wave = []
         self.time_line = []
         self.estimate = []
+        self.estimate_frequency = 0.0
 
         self.tau = 0.0
         self.w = 0.0

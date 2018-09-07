@@ -93,7 +93,7 @@ Waveform average(const Config::SamplingConfig &config, Result::SamplingResult &r
         (*merged_wave)[i] = sum / merged_size;
     }
 
-    return Waveform(merged_wave, interval);
+    return Waveform(merged_wave, interval,frequency);
 }
 
 bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &result) {
@@ -104,7 +104,6 @@ bool estimate(const Config::SamplingConfig &config, Result::SamplingResult &resu
         if (config.emitting_frequency < Constant::HighSpeedSamplingThreshold) {
             frequency_upper_bound = Constant::LowSpeedEstimatedFrequencyUpperBound;
         }
-
         for (double frequency = config.emitting_frequency; frequency <= frequency_upper_bound; frequency *= 2) {
             auto wave = average(config, result, frequency);
             if (Estimate::is_wave_going_down(wave)) {

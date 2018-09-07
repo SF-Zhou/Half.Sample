@@ -62,6 +62,8 @@ namespace Commander {
             Base::variable(b);
             const double loss = Global::result.estimate.loss;
             Base::variable(loss);
+            const double estimate_frequency = Global::result.estimate.estimate_frequency;
+            Base::variable(estimate_frequency);
 
             printf("wave = [");
             const auto &values = *Global::result.estimate.y;

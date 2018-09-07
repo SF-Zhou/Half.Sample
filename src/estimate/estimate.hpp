@@ -10,6 +10,7 @@ struct EstimatedResult {
     double w, b;
     double loss;
     double interval;
+    double estimate_frequency;
     VectorPtr y;
 
     EstimatedResult() {};

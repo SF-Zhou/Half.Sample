@@ -10,8 +10,9 @@ typedef std::shared_ptr<Vector> VectorPtr;
 struct Waveform {
     VectorPtr values;
     double interval;
+    double frequency;
 
-    Waveform(VectorPtr values, double interval): values(values), interval(interval) {}
+    Waveform(VectorPtr values, double interval, double frequency): values(values), interval(interval),frequency(frequency) {}
 };
 
 #endif
